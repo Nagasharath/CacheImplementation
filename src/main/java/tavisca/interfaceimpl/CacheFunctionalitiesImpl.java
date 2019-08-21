@@ -15,10 +15,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CacheFunctionalitiesImpl implements CacheFunctionalities {
 
+    /*
+    * ConcurrentHashMap is used for the thread safety.SoftReference is used to avoid OutOfMemory error
+    * */
     private ConcurrentHashMap<String , SoftReference<InMemoryCacheObject>> inMemoryCache = new ConcurrentHashMap<String, SoftReference<InMemoryCacheObject>>(ProjectConstants.SIZE_OF_IN_MEMORY_CACHE);
 
     private static final Logger logger = LoggerFactory.getLogger(CacheFunctionalitiesImpl.class);
 
+    /*
+    * Ctor for the thread implementation
+    * */
     public CacheFunctionalitiesImpl() throws InterruptedException {
 
         DaemonThread daemonThread = new DaemonThread(inMemoryCache);

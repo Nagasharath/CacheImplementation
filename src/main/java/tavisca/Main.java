@@ -16,8 +16,15 @@ public class Main {
         BasicConfigurator.configure();
 
         Logger logger = LoggerFactory.getLogger(Main.class.getName());
+
+        /*
+        * CacheFunctionalities is the interface for the operation on the cache.
+        * */
         CacheFunctionalities cacheFunctionalities = new CacheFunctionalitiesImpl();
 
+        /*
+         * adding data into the cache
+         * */
         cacheFunctionalities.add("client_1",new Client("XYZ Pvt Ltd","Pune","xyz project"),7000);
 
         cacheFunctionalities.add("client_2",new Client("ABC Pvt Ltd","Hyderabad","abc project"),7000);
@@ -28,15 +35,25 @@ public class Main {
 
         cacheFunctionalities.add("client_3",new Client("XYZ Pvt Ltd","Pune","xyz project"),1000);
 
+        /*
+        * get the data of client using key.Once the object from the cache is used ,its validity time will be updated.
+        * */
         Client client2 = (Client)cacheFunctionalities.get("client_2");
+
         logger.info(client2.getName()+" "+client2.getLocation()+" "+client2.getProjectName());
 
         logger.info("Size of cache:"+cacheFunctionalities.size());
 
+        /*
+         * sleep the thread for 5 seconds and check the size of the cache.
+         * */
         Thread.currentThread().sleep(5000);
 
         logger.info("After some time size of cache:"+cacheFunctionalities.size());
 
+        /*
+         * add new object into the cache
+         * */
         cacheFunctionalities.add("client_4",new Client("XYZ Pvt Ltd","Pune","xyz project"),1000);
 
         Client client4 = (Client)cacheFunctionalities.get("client_4");
